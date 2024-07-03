@@ -1,3 +1,2 @@
-# cross_expression
+# Cross-expression
 R Package for cross-expression analysis in spatial transcriptomic data
-addfa
