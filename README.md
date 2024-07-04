@@ -11,9 +11,29 @@ git clone --depth 1 --filter=blob:none --sparse https://github.com/ameersarwar/c
 cd cross_expression
 git sparse-checkout set example_data
 ```
-### Cross-expression demo
-Create an `R` file by running the command:
+### Initialize R and load package plus data
+In your terminal, run the folling command:
 ```{r}
 touch demo_cross_expression.R
 ```
-Now, run the `CrossExpression.R` script in terminal/shell:
+This will create an empty `R` file in which you can paste the upcoming commands and change the parameters to test various functions.
+
+From now on, we will work exclusively in the `demo_cross_expression.R` file. Open it and set the working directory to `cross_expression`
+```{r}
+setwd("/path/to/root/directory/cross_expression/")
+```
+Run the package file `CrossExpression.R` from within `demo_cross_expression.R`
+```{r}
+source("CrossExpression.R")
+```
+This will load all the relevant functions into your global environment. (We will eventually make `CrossExpression.R` into a package that can be loaded simply as a library.)
+Load the two `example_data` by running:
+```{r}
+# gene expression matrix
+data = read.csv(file = "example_data/expression.csv")
+rownames(data) = data$X; data = data[,2:ncol(data)]
+
+# cell coordinates matrix
+locations = read.csv(file = "example_data/metadata.csv")
+rownames(locations) = locations$X; locations = locations[,2:ncol(locations)]
+```
