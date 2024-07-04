@@ -16,9 +16,10 @@ In your terminal, run the following command:
 ```{r}
 touch demo_cross_expression.R
 ```
-This will create an empty `R` file in which you can paste the upcoming commands and change the parameters to test various functions.
+This will create a new `R` file in which you can paste the upcoming commands and change the parameters to test various functions.
 
-**Important**
+**!!Important!!**
+
 From now on, we will work exclusively in the `demo_cross_expression.R` file. Open it and set the working directory to the `cross_expression` folder, making sure to change `/path/to/root/directory/` to the parent directory of `cross_expression`.
 ```{r}
 setwd("/path/to/root/directory/cross_expression/")
