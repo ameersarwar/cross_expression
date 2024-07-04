@@ -4,10 +4,10 @@ Spatial transcriptomic technologies measure gene expression in individual cells 
 ![Main Figures](https://github.com/ameersarwar/cross_expression/assets/174621170/39552a8a-d29f-4a14-8949-05a6c3d0f01e)
 ## Cross-expression analysis
 ### Download package and example data
-Download the git repository by running the following commands
+Download the git repository by running the following commands in your terminal/shell `sh`:
 ```sh
 git clone --depth 1 --filter=blob:none --sparse https://github.com/ameersarwar/cross_expression
 cd cross_expression
 git sparse-checkout set example_data
 ```
-continue
+Now, run the `CrossExpression.R` script in terminal/shell:
