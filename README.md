@@ -39,5 +39,4 @@ locations = read.csv(file = "example_data/metadata.csv")
 rownames(locations) = locations$X; locations = locations[,2:ncol(locations)]
 ```
 Run `data[1:5,1:5]` and `head(locations)`. You should see the following:
-Your output should be:
-![Uploading Screenshot 2024-07-04 at 2.29.46 AM.png…]()
+<img width="558" alt="Screenshot 2024-07-04 at 2 30 42 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ee54eaf1-a25b-459e-846c-f50bdc4c6325">
