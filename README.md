@@ -4,4 +4,4 @@ Spatial transcriptomic technologies measure gene expression in individual cells 
 ![Main Figures](https://github.com/ameersarwar/cross_expression/assets/174621170/39552a8a-d29f-4a14-8949-05a6c3d0f01e)
 ## Cross-expression analysis
 ### Download data
-Download this [example dataset](url), 
+Download this example_data
