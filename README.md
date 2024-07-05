@@ -46,7 +46,7 @@ rownames(data) = data$X; data = data[,2:ncol(data)]
 locations = read.csv(file = "example_data/metadata.csv")
 rownames(locations) = locations$X; locations = locations[,2:ncol(locations)]
 ```
-Check that the datasets loaded correctly by running:
+Check that the datasets are loaded correctly by running:
 ```{r}
 data[1:5,1:5]
 head(locations)
@@ -76,7 +76,7 @@ The output is given as a dataframe:
 
 <img width="676" alt="Screenshot 2024-07-05 at 12 44 51 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/90b23fb7-987f-4ec2-8a6b-5240dddbc95f">
 
-The function compares each gene pair and reports the p-values of cross-expression before (`cross_pvalue`) and after (`cross_padj`) Benjamini-Hochberg false discovery rate (FDR) multiple test correction. It also reports whether the p-values are significant (`cross_sig`) at `alpha ≤ 0.05` (after FDR) as well as the p-values of these genes' co-expression (`co_pvalue`) after FDR correction. You can play with the other parameters to test how the output changes.
+The function compares each gene pair and reports the p-values of cross-expression before (`cross_pvalue`) and after (`cross_padj`) Benjamini-Hochberg false discovery rate (FDR) multiple test correction. It also reports whether the p-values (after FDR) are significant (`cross_sig`) at `alpha ≤ 0.05` as well as the p-values of these genes' co-expression (`co_pvalue`) after FDR correction. You can play with the other parameters to test how the output changes.
 
 The most important feature of `cross` is `cross_sig`, so let us only keep the gene pairs with significant cross-expression.
 ```{r}
@@ -87,7 +87,10 @@ Inspect the output:
 
 <img width="717" alt="Screenshot 2024-07-05 at 1 04 13 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eb205442-3840-47c7-9dbd-a7ae587ba9a6">
 
-The gene pairs in `cross` now show statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible non-directional pairs that can be formed using `133` genes in our panel). Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
+The gene pairs in `cross` now only include those showing statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs that can be formed using `133` genes in our panel).
+
+**!! Important !!**
+Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm. For example, a gene pair may be cross-expressed in some slices but not in other slices because the underlying expression patterns change over space.
 
 ### Cross-expressing cells on tissue
 We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But spatial transcriptomics allows to see see gene expression in space.
