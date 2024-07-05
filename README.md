@@ -75,9 +75,13 @@ The function compares each gene pair and reports the p-values of cross-expressio
 
 The most important feature of `cross` is `cross_sig`, so let us only keep the gene pairs with significant cross-expression.
 ```{r}
-
-
+cross = cross[as.logical(cross$cross_sig),]
+head(cross)
 ```
+Inspect the output:
+
+<img width="717" alt="Screenshot 2024-07-05 at 1 04 13 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eb205442-3840-47c7-9dbd-a7ae587ba9a6">
+
 
 cross_expression()
 tissue_expression_plot()
