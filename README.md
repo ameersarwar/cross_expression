@@ -93,6 +93,9 @@ The gene pairs in `cross` now only include those showing statistically significa
 
 Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm. For example, a gene pair may be cross-expressed in some slices but not in other slices because the underlying expression patterns change over space.
 
+**!! Important !!**
+POINT ABOUT THRESHOLDING BEFOREHAND/ DOING IT PER GENE, ETC.
+
 ### Cross-expressing cells on tissue
 We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But spatial transcriptomics allows us to see gene expression in space.
 
