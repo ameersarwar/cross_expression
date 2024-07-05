@@ -84,9 +84,24 @@ Inspect the output:
 
 The gene pairs in `cross` now show statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible non-directional pairs that can be formed using `133` genes in our panel). Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
 
+### Cross-expressing cells on tissue
+We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But the power of spatial transcriptomics is in being able to see gene expression in cells.
+
+To this end, let us color the cells based on the expression of `Tafa1` and `Col19a1`. Run the `tissue_expression_plot` function:
+```{r}
+tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = FALSE)
+```
+This shows the following image:
+
+<img width="1038" alt="Screenshot 2024-07-05 at 1 25 33 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/abee8094-b8f3-4dba-a9ba-91feb60bd768">
+
+However, it is still difficult to distinguish the cross-expressing cell-neighbor pairs from individual cells expressing each gene. This can be achieved by calling `tissue_expression_plot` and setting `cross_expression = TRUE` as:
+```{r}
+tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = TRUE)
+```
 
 
-cross_expression()
+
 tissue_expression_plot()
 spatial_enrichment()
 cross_expression_correlation()
