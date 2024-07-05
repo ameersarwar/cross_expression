@@ -99,14 +99,34 @@ However, it is still difficult to distinguish the cross-expressing cell-neighbor
 ```{r}
 tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = TRUE)
 ```
-This produces the following image:
+This produces the following image, which clearly shows that these two genes are preferentially expressed in neighboring cells:
 
 <img width="1039" alt="Screenshot 2024-07-05 at 2 02 43 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eccf7b7d-84ac-4d9c-968e-e1f5e75531e8">
 
+One can view gene pairs of interest or customize the plot using `R`'s `ggplot` `library`, etc.
+
+### Spatial enrichment of cross-expression
+A salient feature of the last two images is that the cross-expressing cells are located towards the top of the slice (cortical brain regions) even though the individual genes, especially `Tafa1`, are expressed fairly broadly. This raises the question, "are cross-expressing cells spatially enriched"?
+
+We can test for the hypothesis that the average distance between cross-expressing cells is smaller than that between cross-expressing and randomly selected cells. In other words, cross-expressing cells are spatially enriched. We test thus by running `spatial_enrichment`:
+```{r}
+enrich = spatial_enrichment(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1")
+enrich$pvalue
+```
+The p-value `5.839144e-06` from `enrich$pvalue` is smaller than `alpha = 0.05`, suggesting that cross-expression patterns between `Tafa1` and `Col19a1` are spatially enriched, confirming our observation that most such cell-neighbor pairs are towards the top of the tissue.
+
+We can view the distances using:
+```{r}
+enrich$plot
+```
+
+This shows the following image:
+
+<img width="969" alt="Screenshot 2024-07-05 at 2 32 47 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/f9d77d36-e7be-40ce-92bd-e58d680a7789">
+
+The `spatial_enrichment` function also contains the two distance distributions, which can be obtained via `enrich$target` and `enrich$null`.
 
 
-tissue_expression_plot()
-spatial_enrichment()
 cross_expression_correlation()
 
 
