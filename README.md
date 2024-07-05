@@ -24,10 +24,12 @@ This will create a new `R` file in which you can paste the upcoming commands and
 
 From now on, we will work exclusively in the `demo_cross_expression.R` file.
 
-Open the `demo_cross_expression.R` file, e.g., in `RStudio`, and set the working directory to the `cross_expression` folder. When using the following command to do so, change `/path/to/parent/directory/` to the parent directory of `cross_expression`.
+Open `demo_cross_expression.R`, e.g., in `RStudio`, and set the working directory to the `cross_expression` folder. When using the following command to do so, change `/path/to/parent/directory/` to the parent directory of `cross_expression`.
 ```{r}
 setwd("/path/to/parent/directory/cross_expression/")
 ```
+For example, in my case the full path is `setwd("/Users/AmeerSarwar/Downloads/cross_expression/")`.
+
 Having set the working directory, run the following command from within `demo_cross_expression.R`
 ```{r}
 source("CrossExpression.R")
