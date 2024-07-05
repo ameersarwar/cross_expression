@@ -22,7 +22,9 @@ This will create a new `R` file in which you can paste the upcoming commands and
 
 **!! Important !!**
 
-From now on, we will work exclusively in the `demo_cross_expression.R` file. Open it and set the working directory to the `cross_expression` folder, making sure to change `/path/to/parent/directory/` to the parent directory of `cross_expression`.
+From now on, we will work exclusively in the `demo_cross_expression.R` file.
+
+Open the `demo_cross_expression.R` file and set the working directory to the `cross_expression` folder, making sure to change `/path/to/parent/directory/` to the parent directory of `cross_expression`.
 ```{r}
 setwd("/path/to/parent/directory/cross_expression/")
 ```
