@@ -78,7 +78,7 @@ The output is given as a dataframe:
 
 The function compares each gene pair and reports the p-values of cross-expression before (`cross_pvalue`) and after (`cross_padj`) Benjamini-Hochberg false discovery rate (FDR) multiple test correction. It also reports whether the p-values (after FDR) are significant (`cross_sig`) at `alpha ≤ 0.05` as well as the p-values of these genes' co-expression (`co_pvalue`) after FDR correction. You can play with the other parameters to test how the output changes.
 
-The most important feature of `cross` is `cross_sig`, so let us only keep the gene pairs with significant cross-expression.
+A critical feature of `cross` is `cross_sig`, so let us only keep the gene pairs with significant cross-expression.
 ```{r}
 cross = cross[as.logical(cross$cross_sig),]
 head(cross)
@@ -94,7 +94,7 @@ The gene pairs in `cross` now only include those showing statistically significa
 Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm. For example, a gene pair may be cross-expressed in some slices but not in other slices because the underlying expression patterns change over space.
 
 ### Cross-expressing cells on tissue
-We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But spatial transcriptomics allows to see see gene expression in space.
+We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But spatial transcriptomics allows us to see gene expression in space.
 
 To this end, let us color the cells based on the expression of `Tafa1` and `Col19a1`, the first gene pair in `cross`. Run the `tissue_expression_plot` function to do so:
 ```{r}
@@ -112,12 +112,12 @@ This produces the following image, which clearly shows that these two genes are 
 
 <img width="1039" alt="Screenshot 2024-07-05 at 2 02 43 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eccf7b7d-84ac-4d9c-968e-e1f5e75531e8">
 
-One can view gene pairs of interest or customize the plot using `R`'s `ggplot` `library`, etc.
+One can then view any gene pair of interest or customize the plot using `R`'s `ggplot` `library`, etc.
 
 ### Spatial enrichment of cross-expression
-A salient feature of the last two images is that the cross-expressing cells are located towards the top of the slice (cortical brain regions) even though the individual genes, especially `Tafa1`, are expressed fairly broadly. This raises the question, "are cross-expressing cells spatially enriched"?
+A salient feature of the last two images is that the cross-expressing cells are located towards the top of the slice (cortical brain regions) even though the individual genes, especially `Tafa1`, are expressed fairly broadly across the tissue. This raises the question, "are cross-expressing cells spatially enriched"?
 
-We can test for the hypothesis that the average distance between cross-expressing cells is smaller than that between cross-expressing and randomly selected cells. In other words, cross-expressing cells are spatially enriched. We test thus by running `spatial_enrichment`:
+We can test for the hypothesis that the average distance between cross-expressing cells is smaller than that between cross-expressing and randomly selected cells. We do the test by running `spatial_enrichment`:
 ```{r}
 enrich = spatial_enrichment(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1")
 enrich$pvalue
