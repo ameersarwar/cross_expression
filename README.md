@@ -51,10 +51,16 @@ You should see the following:
 
 <img width="354" alt="Screenshot 2024-07-04 at 2 32 29 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/e29da77f-e57e-4b34-9bf9-41e95b3e0adf">
 
-The `data` is a cells by genes expression matrix with 94,100 cells assayed 133 genes, and `locations` contains the x (`pos_x`) and y (`pos_y`) coordinates (centroids) for each of the 94,100 cells.
+The `data` is a cells by genes expression matrix with 94,100 cells assayed across 133 genes, and `locations` contains the x (`pos_x`) and y (`pos_y`) coordinates (centroids) for each of the 94,100 cells.
 
 ## Part 2 - Core functions
+We will now conduct cross-expression analysis, which tells us whether a gene is preferentially expressed in cells whose neighbors express another gene. To start, let us take a brief look at our data by running:
+```{r}
+ggplot(locations) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_classic()
+```
+This outputs the image shown below. Each dot is a cell plotted using its x and y coordinates.
 
+<img width="957" alt="Screenshot 2024-07-05 at 12 29 12 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ea18d96d-d115-4c29-a7f7-f74474565479">
 
 
 ## Part 3 - Auxiliary functions
