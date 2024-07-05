@@ -53,7 +53,7 @@ You should see the following:
 The `data` is a cells by genes expression matrix with 94,100 cells assayed across 133 genes, and `locations` contains the x (`pos_x`) and y (`pos_y`) coordinates (centroids) for each of the 94,100 cells.
 
 ## Part 2 - Core functions
-Before we conduct cross-expression analysis, let us briefly look at our data by running:
+Before analyzing our data, let us briefly look at it by running:
 ```{r}
 ggplot(locations) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_classic()
 ```
@@ -62,7 +62,7 @@ This outputs the image shown below, where each dot is a cell plotted using its x
 <img width="1153" alt="Screenshot 2024-07-05 at 12 32 00 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/7cd1017e-3ef4-47d2-990f-349da44fd1ab">
 
 ### Cross-expression across all gene pairs
-We will now conduct cross-expression analysis, which tells us whether a gene is preferentially expressed in cells whose neighbors express another gene. The two main inputs are the gene expression matrix `data` and cell coordinates matrix `locations`. Run the function and view its (default) output:
+We will now perform cross-expression analysis, which tells us whether a gene is preferentially expressed in cells whose neighbors express another gene. The two main inputs are the gene expression matrix `data` and cell coordinates matrix `locations`. Run the function `cross_expression` and view its (default) output:
 ```{r}
 cross = cross_expression(data = data, locations = locations)
 head(cross)
@@ -71,8 +71,7 @@ The output is given as a dataframe:
 
 <img width="676" alt="Screenshot 2024-07-05 at 12 44 51 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/90b23fb7-987f-4ec2-8a6b-5240dddbc95f">
 
-This compares each gene pair and reports the p-values of cross-expression before (`cross_pvalue`) and after (`cross_padj`) Benjamini-Hochberg false discovery rate multiple test correction. It also reports whether the p-values are significant (`cross_sig`) and if these genes are significantly co-expressed (`co_pvalue`) at `alpha <= 0.05`.
-
+This compares each gene pair and reports the p-values of cross-expression before (`cross_pvalue`) and after (`cross_padj`) Benjamini-Hochberg false discovery rate (FDR) multiple test correction. It also reports whether the p-values are significant (`cross_sig`) at `alpha <= 0.05` as well as the p-values of these genes' co-expression (`co_pvalue`) after FDR correction.
 
 
 cross_expression()
