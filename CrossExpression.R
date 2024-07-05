@@ -292,7 +292,7 @@ cross_expression_correlation <- function(data, locations, neighbor = 1, output_m
   
   # create masks for mutually exclusive gene expression
   mask_data = data
-  mask_data[mask_data > 0] = 1
+  mask_data[masfk_data > 0] = 1
   
   mask_data_temp = data_temp
   mask_data_temp[mask_data_temp > 0] = 1
@@ -583,11 +583,28 @@ spatial_enrichment <- function(data, locations, gene1, gene2, neighbor = 1, max_
   dist0 = dist0[1:nrow(locations1),(nrow(locations0)+1):ncol(dist0)]
   dist0 = as.numeric(dist0)
   
-  # compute and return p-value plus two distance distributions
+  # compute p-value and return p-value plus two distance distributions
   pval = wilcox.test(x = scale(dist1), y = scale(dist0), alternative = "less")
   pval = pval$p.value
   
-  pval = list(pvalue = pval, target = dist1, null = dist0)
+  # make plot comparing distances
+  target = dist1
+  null   = dist0
+  
+  pp = data.frame(vals = c(target, null), type = rep(c("Cross-expressing", "Random"), times = c(length(target), length(null))))
+  pp$type = factor(pp$type, levels = c("Random","Cross-expressing"))
+  pp = ggplot(pp) + aes(x = vals, fill = type, y = after_stat(scaled)) +
+    geom_density(alpha = 0.8) +
+    labs(x = "Distance to cells", y = "Density", fill = "") + theme_classic() +
+    guides(fill = guide_legend(reverse = TRUE)) +
+    scale_fill_manual(values = c("Cross-expressing" = "lightblue", "Random" = "gray88")) +
+    theme(legend.position = "top",
+          axis.text = element_text(size = 10),
+          axis.title = element_text(size = 12),
+          legend.text = element_text(size = 12))
+    
+  # return p-value, two distance distributions, and plot
+  pval = list(pvalue = pval, target = dist1, null = dist0, plot = pp)
   return(pval)
 }
 
