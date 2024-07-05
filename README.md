@@ -91,11 +91,11 @@ To this end, let us color the cells based on the expression of `Tafa1` and `Col1
 ```{r}
 tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = FALSE)
 ```
-This shows the following image:
+This shows the following image, where the cells are colored by the expression, co-expression, or non-expression of these genes:
 
 <img width="1038" alt="Screenshot 2024-07-05 at 1 25 33 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/abee8094-b8f3-4dba-a9ba-91feb60bd768">
 
-However, it is still difficult to distinguish the cross-expressing cell-neighbor pairs from individual cells expressing each gene. This can be achieved by calling `tissue_expression_plot` and setting `cross_expression = TRUE` as:
+However, it is still difficult to distinguish the cross-expressing cell-neighbor pairs from individual cells expressing each gene. To only color cross-expressing cells, call the `tissue_expression_plot` function while setting `cross_expression = TRUE`:
 ```{r}
 tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = TRUE)
 ```
