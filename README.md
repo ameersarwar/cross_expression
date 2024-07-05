@@ -82,7 +82,7 @@ Inspect the output:
 
 <img width="717" alt="Screenshot 2024-07-05 at 1 04 13 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eb205442-3840-47c7-9dbd-a7ae587ba9a6">
 
-The gene pairs show statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs that can be formed using `133` genes in our panel). Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
+The gene pairs in `cross` now show statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible non-directional pairs that can be formed using `133` genes in our panel). Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
 
 
 
