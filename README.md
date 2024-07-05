@@ -61,6 +61,22 @@ This outputs the image shown below. Each dot is a cell plotted using its x and y
 
 <img width="1153" alt="Screenshot 2024-07-05 at 12 32 00 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/7cd1017e-3ef4-47d2-990f-349da44fd1ab">
 
+### 
+
+
+
+cross_expression()
+tissue_expression_plot()
+spatial_enrichment()
+cross_expression_correlation()
+
 
 
 ## Part 3 - Auxiliary functions
+
+
+
+bullseye_scores()
+bullseye_plot()
+rotate_coordinates()
+smooth_cells()
