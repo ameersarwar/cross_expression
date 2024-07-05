@@ -31,7 +31,8 @@ Having set the working directory, run the following command from within `demo_cr
 source("CrossExpression.R")
 ```
 This will load all the relevant functions into your global environment. (We will eventually make `CrossExpression.R` into a package that can be loaded simply as a library.)
-Load the `example_data` matrices `expression.csv` and `metadata.csv` by running:
+
+Now, load the `example_data` matrices `expression.csv` and `metadata.csv` by running:
 ```{r}
 # gene expression matrix
 data = read.csv(file = "example_data/expression.csv")
