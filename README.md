@@ -20,7 +20,7 @@ touch demo_cross_expression.R
 ```
 This will create a new `R` file in which you can paste the upcoming commands and play around with various functions.
 
-**!!Important!!**
+**!! Important !!**
 
 From now on, we will work exclusively in the `demo_cross_expression.R` file. Open it and set the working directory to the `cross_expression` folder, making sure to change `/path/to/parent/directory/` to the parent directory of `cross_expression`.
 ```{r}
@@ -116,7 +116,7 @@ enrich$pvalue
 ```
 The p-value from `enrich$pvalue` is smaller than `alpha = 0.05`, suggesting that cross-expression patterns between `Tafa1` and `Col19a1` are spatially enriched, confirming our observation that most such cell-neighbor pairs are towards the top of the tissue.
 
-**!!Important!!**
+**!! Important !!**
 
 The `spatial_enrichment` algorithm is stochastic in the sense that we do not use all the non-cross-expressing cells when computing distances. Instead, we use `max_pairs = 20000` as default. Using a larger number makes the p-value more accurate but reduces computational efficiency.
 
