@@ -60,7 +60,8 @@ ggplot(locations) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_cla
 ```
 This outputs the image shown below. Each dot is a cell plotted using its x and y coordinates.
 
-<img width="957" alt="Screenshot 2024-07-05 at 12 29 12 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ea18d96d-d115-4c29-a7f7-f74474565479">
+<img width="1153" alt="Screenshot 2024-07-05 at 12 32 00 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/7cd1017e-3ef4-47d2-990f-349da44fd1ab">
+
 
 
 ## Part 3 - Auxiliary functions
