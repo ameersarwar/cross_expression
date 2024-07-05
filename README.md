@@ -3,7 +3,7 @@ Spatial transcriptomic technologies measure gene expression in individual cells 
 
 ![Main Figures](https://github.com/ameersarwar/cross_expression/assets/174621170/39552a8a-d29f-4a14-8949-05a6c3d0f01e)
 
-## Part 1 - Demo setup
+## Part 1 - Setup
 We will conduct cross-expression analysis on a dataset collected using BARseq. As an example, here we provide one complete slice sectioned sagittally from the left hemisphere of an adult mouse brain. This data is in the `example_data` directory above and contains the gene expression matrix `expression.csv` and cell coordinates matrix `metadata.csv`.
 
 ### Download package and example data
