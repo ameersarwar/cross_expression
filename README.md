@@ -69,7 +69,8 @@ head(cross)
 ```
 The output is given as an edge list:
 
-<img width="681" alt="Screenshot 2024-07-05 at 12 44 09 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/91abd8bb-d378-4001-b72f-c99e1b2572f4">
+<img width="676" alt="Screenshot 2024-07-05 at 12 44 51 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/90b23fb7-987f-4ec2-8a6b-5240dddbc95f">
+
 
 
 
