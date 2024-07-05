@@ -90,6 +90,7 @@ Inspect the output:
 The gene pairs in `cross` now only include those showing statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs that can be formed using `133` genes in our panel).
 
 **!! Important !!**
+
 Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm. For example, a gene pair may be cross-expressed in some slices but not in other slices because the underlying expression patterns change over space.
 
 ### Cross-expressing cells on tissue
