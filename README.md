@@ -42,7 +42,12 @@ rownames(data) = data$X; data = data[,2:ncol(data)]
 locations = read.csv(file = "example_data/metadata.csv")
 rownames(locations) = locations$X; locations = locations[,2:ncol(locations)]
 ```
-Run `data[1:5,1:5]` and `head(locations)`. You should see the following:
+Check that the datasets loaded correctly by running:
+```{r}
+data[1:5,1:5]
+head(locations)
+```
+You should see the following:
 
 <img width="354" alt="Screenshot 2024-07-04 at 2 32 29 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/e29da77f-e57e-4b34-9bf9-41e95b3e0adf">
 
