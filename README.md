@@ -67,11 +67,11 @@ We will now conduct cross-expression analysis, which tells us whether a gene is 
 cross = cross_expression(data = data, locations = locations)
 head(cross)
 ```
-The output is given as an edge list:
+The output is given as a dataframe:
 
 <img width="676" alt="Screenshot 2024-07-05 at 12 44 51 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/90b23fb7-987f-4ec2-8a6b-5240dddbc95f">
 
-
+This compares each gene pair and reports the p-values of cross-expression before (`cross_pvalue`) and after (`cross_padj`) Benjamini-Hochberg false discovery rate multiple test correction. It also reports whether the p-values are significant (`cross_sig`) and if these genes are significantly co-expressed (`co_pvalue`) at `alpha <= 0.05`.
 
 
 
