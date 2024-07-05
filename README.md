@@ -99,6 +99,9 @@ However, it is still difficult to distinguish the cross-expressing cell-neighbor
 ```{r}
 tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = TRUE)
 ```
+This produces the following image:
+
+<img width="1039" alt="Screenshot 2024-07-05 at 2 02 43 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eccf7b7d-84ac-4d9c-968e-e1f5e75531e8">
 
 
 
