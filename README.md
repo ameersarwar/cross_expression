@@ -7,7 +7,7 @@ Spatial transcriptomic technologies measure gene expression in individual cells 
 We will conduct cross-expression analysis on a dataset collected using BARseq (barcoded anatomy resolved by sequencing). As an example, here we provide one complete slice sectioned sagittally from the left hemisphere of an adult mouse brain. This data is in the `example_data` directory above and contains the gene expression matrix `expression.csv` and cell coordinates matrix `metadata.csv`.
 
 ### Download package and example data
-To work through the demo, the first step is to download the git repository by running the following commands in your terminal `sh`:
+To work through the demo, the first step is to download the git repository by running the following commands in your terminal:
 ```{sh}
 git clone --depth 1 --filter=blob:none --sparse https://github.com/ameersarwar/cross_expression
 cd cross_expression
