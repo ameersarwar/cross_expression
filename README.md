@@ -123,6 +123,7 @@ This allows one to view any gene pair of interest or customize the plot using `R
 A salient feature of the last two images is that the cross-expressing cells are located towards the top of the slice (cortical brain regions) even though the individual genes, especially `Tafa1`, are expressed fairly broadly across the tissue. This raises the question, "are cross-expressing cells spatially enriched"?
 
 We can test for the hypothesis that the average distance between cross-expressing cells is smaller than that between cross-expressing and randomly selected cells.
+
 We do the test by running `spatial_enrichment`:
 ```{r}
 enrich = spatial_enrichment(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1")
@@ -145,9 +146,23 @@ This shows the following image:
 
 The `spatial_enrichment` function also contains the two distance distributions, which can be obtained via `enrich$target` and `enrich$null` for further analysis.
 
+### Cross-expression correlation
+Cross-expression tells us whether the expression of one gene in a cell predict the expression of another gene in its neighbor. The `cross_expression` algorithm quantifies this in terms of probabilities, where lower p-values indicate significant spatial coordination given the genes' counts in the population at large.
 
-cross_expression_correlation()
+However, this formalism does not capture whether cells with high expression of a given gene are neighbors of cells with similarly high expression of another gene. In other words, it does not provide a continuous metric of the strength of spatial coordination.
 
+To this end, we compute Pearson's correlation between genes across cells and neighbors. Like before, we exclude co-expression by considering cell-neighbor pairs showing mutually exclusive expression.
+
+Find correlation between gene pairs using:
+```{r}
+corr = cross_expression_correlation(data = data, locations = locations)
+head(corr)
+```
+The output is as follows:
+
+<img width="286" alt="Screenshot 2024-07-08 at 10 23 18 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/5f28d3bd-848a-4530-b636-b5e858163f22">
+
+This can be used in conjunction with `cross_expression` function, e.g., by considering genes with significant cross-expression, or in isolation, e.g., comparing cross-expression correlations between nearby tissue sections.
 
 
 ## Part 3 - Auxiliary functions
