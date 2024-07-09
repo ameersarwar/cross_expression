@@ -167,8 +167,8 @@ The `cross_expression_correlation` function can be used in conjunction with `cro
 ## Part 3 - Auxiliary functions
 We offer a few functions that augment the core analysis provided above. While they could be used independently, they will often be used as steps within longer analysis pipelines.
 
-### Bulleseye scores - enrichment
-In addition to statistical significance (`cross_expression`) and the strength of association (`cross_expression_correlation`), an important idea is `effect size`, which quantifies a gene's expression within the target cells (those co-expressing the cognate gene) and their neighbors.
+### Bulleseye scores - relative enrichment
+In addition to statistical significance (`cross_expression`) and the strength of association (`cross_expression_correlation`), an important idea is `effect size`, which compares the number of neighbors expressing a gene to the number of target cells co-expressing it alongside the cognate gene.
 
 The `effect size` - also called `bullseye scores` (see below) - are computed using:
 ```{r}
@@ -179,23 +179,26 @@ This generates the output:
 
 <img width="636" alt="Screenshot 2024-07-08 at 11 28 49 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/f9959852-b604-48c5-8c34-dbd0246199f5">
 
-We can see the scores for the target cell (`Cell`) and neighbors `1:5` as specified in `window_sizes = 1:5`. The `window_sizes` input can be non-continuous and in any order, e.g., `window_sizes = c(12, 100, 2:5)`
+We can see the scores for the target cell (`Cell`) and neighbors `1:5` as specified in `window_sizes = 1:5`. The `window_sizes` input can be non-continuous and in any order, e.g., `window_sizes = c(100, 2:5, 12)`
 
 The bullseye scores can be used for subsequent analysis. For example, one can present the scores as ratio of the neighbor to target scores (`ratio_to_co = TRUE` in the `bullseye_scores` function) and compare these across different genes or tissues, etc.
 
 **!! Important !!**
 
-Cross-expression is conceptualized without considering direction. Specifically, the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider both the case where gene A is in the target cell and the case where gene B is in the target cell. The output values are the FDR-corrected lower values and average correlation, respectively.
+Cross-expression is conceptualized without considering direction. Specifically, the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider cases where gene A or gene B is in the target cell. The outputs are the FDR-corrected lower p-values and average correlation, respectively.
 
-Like the two cross-expression functions, the `bullseye_scores` consider both cases above. Unlike these functions, the bullseye scores present both directions as outputs, making the output size in the latter twice as large as in the former two. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired.
+Like the two cross-expression functions, the `bullseye_scores` consider both cases above. Unlike these functions, however, the `bullseye_scores` present both directions as outputs, making the output size here twice as large as in the two cross-expression functions. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired for `bullseye_scores`.
 
 ### Bullseye plot
 
-An effective way of seeing the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. Therefore, the most straightforward way of making bullseye plots is to extract the scores from `bull` (which stores the output of the `bullseye_scores` function).
+An effective way of visualizing the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. Therefore, the most straightforward way of making bullseye plots is to extract the scores from `bull` (which is storing the output of the `bullseye_scores` function).
 
-Here, we make a bullseye plot for an example genes `Galntl6` and `Nrg1`:
+Here, we make a bullseye plot for an example gene pair `Galntl6` (central cell) and `Nrg1` (neighbors):
 ```{r}
+# extract scores for relevant genes
 score_vector = as.numeric(bull[bull$gene1 %in% "Galntl6" & bull$gene2 %in% "Nrg1", 3:ncol(bull)])
+
+# plot bullseye using scores
 bullseye_plot(score_vector)
 ```
 This creates the following plot:
@@ -204,7 +207,36 @@ This creates the following plot:
 
 The plot - called the bullseye plot - shows low co-expression in the central cell and high cross-expression in the nearest neighbor. Importantly, the cross-expression in more distant neighbors is similar to co-expression in the central cells.
 
+### Smooth gene expression
+Our analysis considers cross-expression as a relationship between individual cells. However, groups of cells may form a spatially contiguous niche and cross-expression may obtain between niches.
 
+We facilitate this analysis by smoothing (convolving) genes' expression in cells with that in their neighbors (kernel), which is a user-defined parameter.
 
-rotate_coordinates()
-smooth_cells()
+Gene expression can be smoothed using:
+```{r}
+smth = smooth_cells(data = data, locations = locations, neighbors_smoothed = 5, corr = TRUE)
+```
+The `neighbors_smoothed = 0` performs no smoothing and any number above specifies the number of neighbors to use as the smoothing kernel. For example, `neighbors_smoothed = 5` smooths the gene expression using `5` nearest neigbhors. The `corr = TRUE` specifies that correlations between the 5-neighbor niches should be computed.
+
+### Rotate tissue
+During spatial transcriptomic data collection, tissues are often unaligned with respect to the glass slide or to each other. While sophisticated methods exist to non-linearly align them in the same coordinate plane, one is often interested in simply rotating, translating, or reflecting (linear transformations) the tissue to aid biological interpretation. For example, the cortical brain regions are usually presented towards the top of the slide.
+
+```{r}
+# rotate coordinates
+locations2 = rotate_coordinates(x = locations$pos_x, y = locations$pos_y, n_degrees = 20, center = TRUE, scale = TRUE, flip_x = TRUE, flip_y = TRUE)
+
+# view result
+ggplot(locations2) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_classic()
+```
+The output in `locations2` rotates the xy coordinates `20` degrees counter-clockwise, z-score normalize them (`center = TRUE` and `scale = TRUE`), and reflect in the x and y axes (`flip_x = TRUE` and `flip_y = TRUE`).
+
+In practice, the original tissue may have coordinates in a position resembling those in `location2`, thereby needing rotation in light with biological knowledge about the tissue and common practices regarding its presentation.
+
+## Citation
+If you find the cross-expression framework or the accompanying functions useful, please cite the following manuscript:
+
+```{sh}
+Sarwar A, Rue M, French L, Cross H, Chen X, & Gillis J.
+Cross-expression analysis reveals patterns of coordinated gene expression in spatial transcriptomics
+Journal Name (20xx). DOI-info.
+```
