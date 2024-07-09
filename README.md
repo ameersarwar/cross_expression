@@ -149,7 +149,7 @@ The `spatial_enrichment` function also contains the two distance distributions, 
 ### Cross-expression correlation
 Cross-expression tells us whether the expression of one gene in a cell predict the expression of another gene in its neighbor. The `cross_expression` algorithm quantifies this in terms of probabilities, where lower p-values indicate significant spatial coordination given the genes' counts in the population at large.
 
-However, this formalism does not provide a continuous metric of the strength of spatial relationship. For instance, it does not tell us whether cells with high expression of a given gene are neighbors of cells with similarly high (or low) expression of another gene.
+However, this formalism does not provide a continuous metric of the strength of the spatial relationship. Specifically, it does not tell us whether cells with high expression of a given gene are neighbors of cells with similarly high (or low) expression of another gene.
 
 To this end, we compute Pearson's correlation between genes across cells and neighbors. Like before, we exclude co-expression by considering cell-neighbor pairs showing mutually exclusive expression.
 
@@ -162,7 +162,7 @@ The output is as follows:
 
 <img width="286" alt="Screenshot 2024-07-08 at 10 23 18 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/5f28d3bd-848a-4530-b636-b5e858163f22">
 
-This can be used in conjunction with `cross_expression` function, e.g., by considering genes with significant cross-expression, or in isolation, e.g., comparing cross-expression correlations between nearby tissue sections.
+The `cross_expression_correlation` function can be used in conjunction with `cross_expression`, e.g., by considering genes with significant cross-expression, or in isolation, e.g., comparing cross-expression correlations between nearby tissue sections.
 
 ## Part 3 - Auxiliary functions
 
