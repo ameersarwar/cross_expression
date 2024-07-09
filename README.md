@@ -228,6 +228,9 @@ locations2 = rotate_coordinates(x = locations$pos_x, y = locations$pos_y, n_degr
 # view result
 ggplot(locations2) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_classic()
 ```
+
+<img width="1060" alt="Screenshot 2024-07-09 at 12 32 00 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/736d95a9-11ae-4cb7-97ab-0cc70cad0fcf">
+
 The output in `locations2` rotates the xy coordinates `20` degrees counter-clockwise, z-score normalize them (`center = TRUE` and `scale = TRUE`), and reflect in the x and y axes (`flip_x = TRUE` and `flip_y = TRUE`).
 
 In practice, the original tissue may have coordinates in a position resembling those in `location2`, thereby needing rotation in light with biological knowledge about the tissue and common practices regarding its presentation.
