@@ -13,7 +13,7 @@ git clone --depth 1 --filter=blob:none --sparse https://github.com/ameersarwar/c
 cd cross_expression
 git sparse-checkout set example_data
 ```
-### Initialize R and load package plus data
+### Initialize R
 In your terminal, run the following command:
 ```{r}
 touch demo_cross_expression.R
@@ -34,6 +34,7 @@ source("CrossExpression.R")
 ```
 This will load all the relevant functions into your global environment. (We will eventually make `CrossExpression.R` into a package that can be loaded simply as a library.)
 
+### Load data
 Now, load the `example_data` matrices `expression.csv` and `metadata.csv` by running:
 ```{r}
 # gene expression matrix
