@@ -86,14 +86,15 @@ Inspect the output:
 
 <img width="717" alt="Screenshot 2024-07-05 at 1 04 13 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eb205442-3840-47c7-9dbd-a7ae587ba9a6">
 
-The gene pairs in `cross` now only include those showing statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs in our `133` gene panel).
+The gene pairs in `cross` now only include those showing statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs in the `133` gene panel).
 
 **!! Important !!**
 
-Gene expression is spatially variable, e.g., a gene may be expressed in some slices but not in others. Since cross-expression captures coordinated gene expression, it may also spatially be spatially variable, e.g., a gene pair may cross-express in some slices but not in others. Accordingly, understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
+Gene expression is spatially variable, e.g., a gene may be expressed in some slices but not in others. Since cross-expression captures coordinated gene expression, it may also be spatially spatially variable, e.g., a gene pair may cross-express in some slices but not in others. Accordingly, understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
 
 **!! Important !!**
-POINT ABOUT THRESHOLDING BEFOREHAND/ DOING IT PER GENE, ETC.
+
+Here, we have assumed that a gene is expressed within a cell if its count is non-zero. However, one may think that gene expression is stochastic and apply a threshold to distinguish background expression from genuine transcription. Consequently, the user may input the thresholded matrix. The `cross_expression` function will count the non-zero entries as instances of gene expression.
 
 ### Cross-expressing cells on tissue
 We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But spatial transcriptomics allows us to see gene expression in space.
