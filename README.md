@@ -152,7 +152,7 @@ Cross-expression tells us whether the expression of one gene in a cell predicts 
 
 However, this formalism does not provide a continuous metric of the strength of the spatial relationship. Specifically, it does not tell us whether cells with high expression of a given gene are neighbors of cells with similarly high (or low) expression of another gene.
 
-To this end, we compute Pearson's correlation between genes across cells and neighbors. Whereas in co-expression the correlation is computed using gene expression vectors obtained from the same cells, in cross-expression the correlation is computed using gene expression vectors obtained from the cells and their neighbors. Like before, the cell-neighbor pairs must show mutually exclusive expression.
+To this end, we compute Pearson's correlation between genes across cells and neighbors. Whereas in co-expression the correlation is computed between gene expression vectors obtained from the same cells, in cross-expression the correlation is computed between gene expression vectors obtained from the cells and their neighbors. Like before, the cell-neighbor pairs must show mutually exclusive expression.
 
 Find the correlations between gene pairs using `cross_expression_correlation`:
 ```{r}
@@ -166,7 +166,7 @@ The output is as follows:
 The `cross_expression_correlation` function can be used in conjunction with `cross_expression`, e.g., by considering genes with significant cross-expression, or in isolation, e.g., comparing cross-expression correlations between nearby tissue sections.
 
 ## Part 3 - Auxiliary functions
-We offer a few functions that augment the core analysis provided above. While they could be used independently, they will often be used as steps within longer analysis pipelines.
+We offer a few functions that augment the core analysis provided above. While these could be used independently, they will often be used as steps within longer analysis pipelines.
 
 ### Bulleseye scores - relative enrichment
 In addition to statistical significance (`cross_expression`) and the strength of association (`cross_expression_correlation`), an important idea is `effect size`, which compares the number of neighbors expressing a gene to the number of target cells co-expressing it alongside the cognate gene.
@@ -180,19 +180,19 @@ This generates the output:
 
 <img width="636" alt="Screenshot 2024-07-08 at 11 28 49 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/f9959852-b604-48c5-8c34-dbd0246199f5">
 
-We can see the scores for the target cell (`Cell`) and neighbors `1:5` as specified in `window_sizes = 1:5`. The `window_sizes` input can be non-continuous and in any order, e.g., `window_sizes = c(100, 2:5, 12)`
+We can see the scores for the target cell (`Cell`) and the neighbors `1:5` as specified in `window_sizes = 1:5`. The `window_sizes` input can be non-continuous and in any order, e.g., `window_sizes = c(100, 2:5, 12)`
 
 The bullseye scores can be used for subsequent analysis. For example, one can present the scores as ratio of the neighbor to target scores (`ratio_to_co = TRUE` in the `bullseye_scores` function) and compare these across different genes or tissues, etc.
 
 **!! Important !!**
 
-Cross-expression is conceptualized without considering direction. Specifically, the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider cases where gene A or gene B is in the target cell. The outputs are the FDR-corrected lower p-values and average correlation, respectively.
+Cross-expression is conceptualized without considering direction. Specifically, the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider the cases where gene A or gene B is in the target cell. The outputs are the FDR-corrected lower p-values and average correlation, respectively.
 
 Like the two cross-expression functions, the `bullseye_scores` consider both cases above. Unlike these functions, however, the `bullseye_scores` present both directions as outputs, making the output size here twice as large as in the two cross-expression functions. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired for `bullseye_scores`.
 
 ### Bullseye plot
 
-An effective way of visualizing the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. Therefore, the most straightforward way of making bullseye plots is to extract the scores from `bull` (which is storing the output of the `bullseye_scores` function).
+An effective way to visualize the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. Therefore, the most straightforward way of making bullseye plots is to extract the scores from `bull` (which is storing the output of the `bullseye_scores` function).
 
 Here, we make a bullseye plot for an example gene pair `Galntl6` (central cell) and `Nrg1` (neighbors):
 ```{r}
@@ -206,7 +206,7 @@ This creates the following plot:
 
 <img width="653" alt="Screenshot 2024-07-08 at 11 16 40 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ac0c53cc-cbd7-4b0e-9725-e1ce228139af">
 
-The plot - called the bullseye plot - shows low co-expression in the central cell and high cross-expression in the nearest neighbor. Importantly, the cross-expression in more distant neighbors is similar to co-expression in the central cells.
+The plot - called the `bullseye plot` - shows few cells co-expressing `Nrg1` with `Galntl6` (center) and many nearest neighbors (first ring) of `Galntl6`-positive cells expressing `Nrg1`. Importantly, the number of distant neighbors (subsequent rings) expressing `Nrg1` is about the same as the number of cells co-expressing both genes.
 
 ### Smooth gene expression
 Our analysis considers cross-expression as a relationship between individual cells. However, groups of cells may form a spatially contiguous niche and cross-expression may obtain between niches.
