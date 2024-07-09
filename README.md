@@ -1,3 +1,5 @@
+- [Introduction](#introduction)
+
 # Cross-expression
 
 Ameer Sarwar, Mara Rue, Leon French, Helen Cross, Xiaoyin Chen, and Jesse Gillis
