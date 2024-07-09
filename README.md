@@ -117,12 +117,13 @@ This produces the following image, which clearly shows that these two genes are 
 
 <img width="1039" alt="Screenshot 2024-07-05 at 2 02 43 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eccf7b7d-84ac-4d9c-968e-e1f5e75531e8">
 
-One can then view any gene pair of interest or customize the plot using `R`'s `ggplot` `library`, etc.
+This allows one to view any gene pair of interest or customize the plot using `R`'s `ggplot` `library`, etc.
 
 ### Spatial enrichment of cross-expression
 A salient feature of the last two images is that the cross-expressing cells are located towards the top of the slice (cortical brain regions) even though the individual genes, especially `Tafa1`, are expressed fairly broadly across the tissue. This raises the question, "are cross-expressing cells spatially enriched"?
 
-We can test for the hypothesis that the average distance between cross-expressing cells is smaller than that between cross-expressing and randomly selected cells. We do the test by running `spatial_enrichment`:
+We can test for the hypothesis that the average distance between cross-expressing cells is smaller than that between cross-expressing and randomly selected cells.
+We do the test by running `spatial_enrichment`:
 ```{r}
 enrich = spatial_enrichment(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1")
 enrich$pvalue
