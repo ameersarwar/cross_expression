@@ -68,9 +68,10 @@ This outputs the image shown below, where each dot is a cell plotted using its x
 ### Cross-expression across all gene pairs
 We will now perform cross-expression analysis, which tells us whether a gene is preferentially expressed in cells whose neighbors express another gene. The two main inputs are the gene expression matrix `data` and cell coordinates matrix `locations`. Run the function `cross_expression` and view its (default) output:
 ```{r}
-cross = cross_expression(data = data, locations = locations)
+cross = cross_expression(data = data, locations = locations, neighbor = 1, alpha_cross = 0.05, alpha_co = 0, output_matrix = FALSE)
 head(cross)
 ```
+
 The output is given as a dataframe:
 
 <img width="676" alt="Screenshot 2024-07-05 at 12 44 51 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/90b23fb7-987f-4ec2-8a6b-5240dddbc95f">
@@ -103,7 +104,7 @@ To this end, let us color the cells based on the expression of `Tafa1` and `Col1
 
 Run the `tissue_expression_plot` function to do so:
 ```{r}
-tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = FALSE)
+tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = FALSE, neighbor = 1, point_size = 0, scale_bar = 0)
 ```
 This shows the following image, where the cells are colored by the expression, co-expression, or non-expression of these genes:
 
@@ -111,7 +112,7 @@ This shows the following image, where the cells are colored by the expression, c
 
 However, it is still difficult to distinguish the cross-expressing cell-neighbor pairs from individual cells expressing each gene. To only color cross-expressing cells, call the `tissue_expression_plot` function while setting `cross_expression = TRUE`:
 ```{r}
-tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = TRUE)
+tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = TRUE, neighbor = 1, point_size = 0, scale_bar = 0)
 ```
 This produces the following image, which clearly shows that these two genes are preferentially expressed in neighboring cells:
 
@@ -126,7 +127,7 @@ We can test for the hypothesis that the average distance between cross-expressin
 
 We do the test by running `spatial_enrichment`:
 ```{r}
-enrich = spatial_enrichment(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1")
+enrich = spatial_enrichment(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", neighbor = 1, max_pairs = 20000)
 enrich$pvalue
 ```
 The p-value from `enrich$pvalue` is smaller than `alpha = 0.05`, suggesting that cross-expression patterns between `Tafa1` and `Col19a1` are spatially enriched, confirming our observation that most such cell-neighbor pairs are towards the top of the tissue.
@@ -151,11 +152,11 @@ Cross-expression tells us whether the expression of one gene in a cell predicts 
 
 However, this formalism does not provide a continuous metric of the strength of the spatial relationship. Specifically, it does not tell us whether cells with high expression of a given gene are neighbors of cells with similarly high (or low) expression of another gene.
 
-To this end, we compute Pearson's correlation between genes across cells and neighbors. Whereas in co-expression the correlation is computed using gene expression vectors obtained from the same cells, in cross-expression the correlation is computed using gene expression vectors from the cells and their neighbors. Like before, the cell-neighbor pairs must show mutually exclusive expression.
+To this end, we compute Pearson's correlation between genes across cells and neighbors. Whereas in co-expression the correlation is computed using gene expression vectors obtained from the same cells, in cross-expression the correlation is computed using gene expression vectors obtained from the cells and their neighbors. Like before, the cell-neighbor pairs must show mutually exclusive expression.
 
 Find the correlations between gene pairs using `cross_expression_correlation`:
 ```{r}
-corr = cross_expression_correlation(data = data, locations = locations)
+corr = cross_expression_correlation(data = data, locations = locations, neighbor = 1, output_matrix = FALSE)
 head(corr)
 ```
 The output is as follows:
@@ -172,7 +173,7 @@ In addition to statistical significance (`cross_expression`) and the strength of
 
 The `effect size` - also called `bullseye scores` (see below) - are computed using:
 ```{r}
-bull = bullseye_scores(data = data, locations = locations, window_sizes = 1:5)
+bull = bullseye_scores(data = data, locations = locations, window_sizes = 1:5, ratio_to_co = FALSE, log_2 = FALSE, output_matrix = FALSE)
 head(bull)
 ```
 This generates the output:
@@ -199,7 +200,7 @@ Here, we make a bullseye plot for an example gene pair `Galntl6` (central cell) 
 score_vector = as.numeric(bull[bull$gene1 %in% "Galntl6" & bull$gene2 %in% "Nrg1", 3:ncol(bull)])
 
 # plot bullseye using scores
-bullseye_plot(score_vector)
+bullseye_plot(scores = score_vector)
 ```
 This creates the following plot:
 
