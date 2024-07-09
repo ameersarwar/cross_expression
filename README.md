@@ -245,5 +245,5 @@ Sarwar A, Rue M, French L, Cross H, Chen X, & Gillis J.
 Cross-expression analysis reveals patterns of coordinated gene expression in spatial transcriptomics
 Journal Name (20xx). DOI-info.
 ```
-### Contact
+## Contact
 If you have any questions, please email XXX.
