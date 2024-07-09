@@ -165,10 +165,45 @@ The output is as follows:
 The `cross_expression_correlation` function can be used in conjunction with `cross_expression`, e.g., by considering genes with significant cross-expression, or in isolation, e.g., comparing cross-expression correlations between nearby tissue sections.
 
 ## Part 3 - Auxiliary functions
+We provide a few functions that augment the core analysis provided above. While they could be used independently, they will often be used as steps within longer analysis pipelines.
+
+### Bulleseye scores - enrichment
+In addition to statistical significant (`cross_expression`) and the strength of association (`cross_expression_correlation`), an important idea is effect size, which quantifies a gene's expression within the target cells (those with the cognate gene) and the neighboring cells.
+
+The `effect size` - also called `bullseye scores` (see below) - are computed using:
+```{r}
+bull = bullseye_scores(data = data, locations = locations, window_sizes = 1:5)
+head(bull)
+```
+This generates the output:
+
+<img width="764" alt="Screenshot 2024-07-08 at 11 14 57 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/cba7f67b-c0de-4342-a8f7-fc055807ff00">
+
+
+We can see the scores for the target cell (`Cell`) and neighbors `1:10` in accordance with `window_sizes = 1:5`. These can be used for subsequent analysis. For example, one can present the scores as ratio of the neighbor to target scores (`ratio_to_co = TRUE` in the `bullseye_scores` function) and compare these across different genes or tissues, etc.
+
+**!! Important !!**
+
+Cross-expression is conceptualized without considering direction in the sense that the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider both the case where gene A is in the target cell and the case where gene B is in the target cell. The output values are the FDR-corrected lower values and average correlation, respectively.
+
+Like the two cross-expression functions, the bullseye scores consider both cases above. Unlike these functions, the bullseye scores present both directions as outputs, making the output size in the latter twice as large as in the former two. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired.
+
+### Bullseye plot
+
+An effective way of seeing the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. Therefore, the most straightforward way of making bullseye plots is to extract the scores from `bull` (which stores the output of the `bullseye_scores` function).
+
+Here, we make a bullseye plot for an example genes `Galntl6` and `Nrg1`:
+```{r}
+score_vector = as.numeric(bull[bull$gene1 %in% "Galntl6" & bull$gene2 %in% "Nrg1", 3:ncol(bull)])
+bullseye_plot(score_vector)
+```
+This creates the following plot:
+
+<img width="653" alt="Screenshot 2024-07-08 at 11 16 40 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ac0c53cc-cbd7-4b0e-9725-e1ce228139af">
+
+The plot - called the bullseye plot - shows low co-expression in the central cell and high cross-expression in the nearest neighbor. Importantly, the cross-expression in more distant neighbors is similar to co-expression in the central cells.
 
 
 
-bullseye_scores()
-bullseye_plot()
 rotate_coordinates()
 smooth_cells()
