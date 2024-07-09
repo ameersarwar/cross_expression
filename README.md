@@ -192,7 +192,7 @@ Like the two cross-expression functions, the `bullseye_scores` consider both cas
 
 ### Bullseye plot
 
-An effective way to visualize the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. Therefore, the most straightforward way of making bullseye plots is to extract the scores from `bull` (which is storing the output of the `bullseye_scores` function).
+An effective way to visualize the effect size is in the form of bullseye plots. These require a vector of input scores, where the first score corresponds to the target cell and subsequent scores represent `window_sizes`. The most straightforward way of making bullseye plots, therefore, is to extract the scores from `bull` (which is storing the output of the `bullseye_scores` function).
 
 Here, we make a bullseye plot for an example gene pair `Galntl6` (central cell) and `Nrg1` (neighbors):
 ```{r}
@@ -206,18 +206,16 @@ This creates the following plot:
 
 <img width="653" alt="Screenshot 2024-07-08 at 11 16 40 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ac0c53cc-cbd7-4b0e-9725-e1ce228139af">
 
-The plot - called the `bullseye plot` - shows few cells co-expressing `Nrg1` with `Galntl6` (center) and many nearest neighbors (first ring) of `Galntl6`-positive cells expressing `Nrg1`. Importantly, the number of distant neighbors (subsequent rings) expressing `Nrg1` is about the same as the number of cells co-expressing both genes.
+The plot - called the `bullseye plot` - shows few cells co-expressing `Nrg1` with `Galntl6` (center) and many nearest neighbors (first ring) expressing `Nrg1`. Importantly, the number of distant neighbors (subsequent rings) expressing `Nrg1` is about the same as the number of cells co-expressing both genes.
 
 ### Smooth gene expression
-Our analysis considers cross-expression as a relationship between individual cells. However, groups of cells may form a spatially contiguous niche and cross-expression may obtain between niches.
+We consider cross-expression as a relation between individual cells. However, groups of cells may form spatially contiguous niches and cross-expression may obtain between niches.
 
-We facilitate this analysis by smoothing (convolving) genes' expression in cells with that in their neighbors (kernel), which is a user-defined parameter.
-
-Gene expression can be smoothed using:
+We facilitate this analysis by smoothing (convolving) genes' expression in cells with that in their neighbors (kernel) using:
 ```{r}
 smth = smooth_cells(data = data, locations = locations, neighbors_smoothed = 5, corr = TRUE)
 ```
-The `neighbors_smoothed = 0` performs no smoothing and any number above specifies the number of neighbors to use as the smoothing kernel. For example, `neighbors_smoothed = 5` smooths the gene expression using `5` nearest neigbhors. The `corr = TRUE` specifies that correlations between the 5-neighbor niches should be computed.
+The `neighbors_smoothed = 0` performs no smoothing and positive integers specify the number of neighbors to use as the smoothing kernel. For example, `neighbors_smoothed = 5` smooths the gene expression using `5` nearest neigbhors. The `corr = TRUE` specifies that correlations between the 5-neighbor niches should be computed.
 
 ### Rotate tissue
 During spatial transcriptomic data collection, tissues are often unaligned with respect to the glass slide or to each other. While sophisticated methods exist to non-linearly align them in the same coordinate plane, one is often interested in simply rotating, translating, or reflecting (linear transformations) the tissue to aid biological interpretation. For example, the cortical brain regions are usually presented towards the top of the slide.
@@ -234,7 +232,7 @@ ggplot(locations2) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_cl
 
 The output in `locations2` rotates the xy coordinates `20` degrees counter-clockwise, z-score normalize them (`center = TRUE` and `scale = TRUE`), and reflect in the x and y axes (`flip_x = TRUE` and `flip_y = TRUE`).
 
-In practice, the original tissue may have coordinates in a position resembling those in `location2`, thereby needing rotation in light with biological knowledge about the tissue and common practices regarding its presentation.
+In practice, we may begin with a tissue resembling `location2` and rotate it until it becomes close to the tissue in `locations`. Importantly, the linear transformations must be performed in light of the tissue biology and common practices concerning its presentation.
 
 ## Citation
 If you find the cross-expression framework or the accompanying functions useful, please cite the following manuscript:
