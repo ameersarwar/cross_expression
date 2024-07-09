@@ -147,11 +147,11 @@ This shows the following image:
 The `spatial_enrichment` function also contains the two distance distributions, which can be obtained via `enrich$target` and `enrich$null` for further analysis.
 
 ### Cross-expression correlation
-Cross-expression tells us whether the expression of one gene in a cell predicts the expression of another gene in its neighbor. The `cross_expression` algorithm quantifies this in terms of probabilities, where p-values lower than an `alpha` indicate significant spatial coordination given the genes' counts in the population at large.
+Cross-expression tells us whether the expression of one gene in a cell predicts the expression of another gene in its neighbor. The `cross_expression` algorithm quantifies this in terms of probabilities, where p-values lower than `alpha` indicate significant spatial coordination given the genes' counts in the population at large.
 
 However, this formalism does not provide a continuous metric of the strength of the spatial relationship. Specifically, it does not tell us whether cells with high expression of a given gene are neighbors of cells with similarly high (or low) expression of another gene.
 
-To this end, we compute Pearson's correlation between genes across cells and neighbors. Like before, we exclude co-expression by considering cell-neighbor pairs showing mutually exclusive expression.
+To this end, we compute Pearson's correlation between genes across cells and neighbors. Whereas in co-expression the correlation is computed using gene expression vectors obtained from the same cells, in cross-expression the correlation is computed using gene expression vectors from the cells and their neighbors. Like before, the cells and their neighbor must show mutually exclusive expression.
 
 Find the correlations between gene pairs using `cross_expression_correlation`:
 ```{r}
