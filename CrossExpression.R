@@ -292,7 +292,7 @@ cross_expression_correlation <- function(data, locations, neighbor = 1, output_m
   
   # create masks for mutually exclusive gene expression
   mask_data = data
-  mask_data[masfk_data > 0] = 1
+  mask_data[mask_data > 0] = 1
   
   mask_data_temp = data_temp
   mask_data_temp[mask_data_temp > 0] = 1
