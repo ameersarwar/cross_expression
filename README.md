@@ -90,16 +90,18 @@ The gene pairs in `cross` now only include those showing statistically significa
 
 **!! Important !!**
 
-Gene expression is spatially variable, e.g., a gene may be expressed in some slices but not in others. Since cross-expression captures coordinated gene expression, it may also be spatially spatially variable, e.g., a gene pair may cross-express in some slices but not in others. Accordingly, understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
+Gene expression is spatially variable, e.g., a gene may be expressed in some slices but not in others. Since cross-expression captures coordinated gene expression, it may also be spatially variable, e.g., a gene pair may cross-express in some slices but not in others. Accordingly, understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
 
 **!! Important !!**
 
-Here, we have assumed that a gene is expressed within a cell if its count is non-zero. However, one may think that gene expression is stochastic and apply a threshold to distinguish background expression from genuine transcription. Consequently, the user may input the thresholded matrix. The `cross_expression` function will count the non-zero entries as instances of gene expression.
+Here, we have assumed that a gene is expressed within a cell if its count is non-zero. However, one may think that gene expression is stochastic and apply a threshold to distinguish background expression from genuine transcription. Consequently, the user may input the thresholded matrix, and the `cross_expression` function will count the non-zero entries as instances of gene expression.
 
 ### Cross-expressing cells on tissue
 We now have statistical evidence that, for the genes listed in `cross`, the expression of one gene in a cell predicts the expression of another gene in the neighboring cell. But spatial transcriptomics allows us to see gene expression in space.
 
-To this end, let us color the cells based on the expression of `Tafa1` and `Col19a1`, the first gene pair in `cross`. Run the `tissue_expression_plot` function to do so:
+To this end, let us color the cells based on the expression of `Tafa1` and `Col19a1`, the first gene pair in `cross`.
+
+Run the `tissue_expression_plot` function to do so:
 ```{r}
 tissue_expression_plot(data = data, locations = locations, gene1 = "Tafa1", gene2 = "Col19a1", cross_expression = FALSE)
 ```
