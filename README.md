@@ -90,7 +90,7 @@ The gene pairs in `cross` now only include those showing statistically significa
 
 **!! Important !!**
 
-Since gene expression is regional, cross-expression is also regional, so understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm. For example, a gene pair may be cross-expressed in some slices but not in other slices because the underlying expression patterns change over space.
+Gene expression is spatially variable, e.g., a gene may be expressed in some slices but not in others. Since cross-expression captures coordinated gene expression, it may also spatially be spatially variable, e.g., a gene pair may cross-express in some slices but not in others. Accordingly, understanding the input gene expression and cell coordinates is essential when interpreting the results of the `cross_expression` algorithm.
 
 **!! Important !!**
 POINT ABOUT THRESHOLDING BEFOREHAND/ DOING IT PER GENE, ETC.
