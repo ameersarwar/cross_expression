@@ -147,13 +147,13 @@ This shows the following image:
 The `spatial_enrichment` function also contains the two distance distributions, which can be obtained via `enrich$target` and `enrich$null` for further analysis.
 
 ### Cross-expression correlation
-Cross-expression tells us whether the expression of one gene in a cell predict the expression of another gene in its neighbor. The `cross_expression` algorithm quantifies this in terms of probabilities, where lower p-values indicate significant spatial coordination given the genes' counts in the population at large.
+Cross-expression tells us whether the expression of one gene in a cell predicts the expression of another gene in its neighbor. The `cross_expression` algorithm quantifies this in terms of probabilities, where p-values lower than an `alpha` indicate significant spatial coordination given the genes' counts in the population at large.
 
 However, this formalism does not provide a continuous metric of the strength of the spatial relationship. Specifically, it does not tell us whether cells with high expression of a given gene are neighbors of cells with similarly high (or low) expression of another gene.
 
 To this end, we compute Pearson's correlation between genes across cells and neighbors. Like before, we exclude co-expression by considering cell-neighbor pairs showing mutually exclusive expression.
 
-Find correlation between gene pairs using `cross_expression_correlation`:
+Find the correlations between gene pairs using `cross_expression_correlation`:
 ```{r}
 corr = cross_expression_correlation(data = data, locations = locations)
 head(corr)
@@ -165,10 +165,10 @@ The output is as follows:
 The `cross_expression_correlation` function can be used in conjunction with `cross_expression`, e.g., by considering genes with significant cross-expression, or in isolation, e.g., comparing cross-expression correlations between nearby tissue sections.
 
 ## Part 3 - Auxiliary functions
-We provide a few functions that augment the core analysis provided above. While they could be used independently, they will often be used as steps within longer analysis pipelines.
+We offer a few functions that augment the core analysis provided above. While they could be used independently, they will often be used as steps within longer analysis pipelines.
 
 ### Bulleseye scores - enrichment
-In addition to statistical significant (`cross_expression`) and the strength of association (`cross_expression_correlation`), an important idea is effect size, which quantifies a gene's expression within the target cells (those with the cognate gene) and the neighboring cells.
+In addition to statistical significance (`cross_expression`) and the strength of association (`cross_expression_correlation`), an important idea is `effect size`, which quantifies a gene's expression within the target cells (those co-expressing the cognate gene) and their neighbors.
 
 The `effect size` - also called `bullseye scores` (see below) - are computed using:
 ```{r}
@@ -177,16 +177,17 @@ head(bull)
 ```
 This generates the output:
 
-<img width="764" alt="Screenshot 2024-07-08 at 11 14 57 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/cba7f67b-c0de-4342-a8f7-fc055807ff00">
+<img width="636" alt="Screenshot 2024-07-08 at 11 28 49 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/f9959852-b604-48c5-8c34-dbd0246199f5">
 
+We can see the scores for the target cell (`Cell`) and neighbors `1:5` as specified in `window_sizes = 1:5`.
 
-We can see the scores for the target cell (`Cell`) and neighbors `1:10` in accordance with `window_sizes = 1:5`. These can be used for subsequent analysis. For example, one can present the scores as ratio of the neighbor to target scores (`ratio_to_co = TRUE` in the `bullseye_scores` function) and compare these across different genes or tissues, etc.
+These can be used for subsequent analysis. For example, one can present the scores as ratio of the neighbor to target scores (`ratio_to_co = TRUE` in the `bullseye_scores` function) and compare these across different genes or tissues, etc.
 
 **!! Important !!**
 
-Cross-expression is conceptualized without considering direction in the sense that the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider both the case where gene A is in the target cell and the case where gene B is in the target cell. The output values are the FDR-corrected lower values and average correlation, respectively.
+Cross-expression is conceptualized without considering direction. Specifically, the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider both the case where gene A is in the target cell and the case where gene B is in the target cell. The output values are the FDR-corrected lower values and average correlation, respectively.
 
-Like the two cross-expression functions, the bullseye scores consider both cases above. Unlike these functions, the bullseye scores present both directions as outputs, making the output size in the latter twice as large as in the former two. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired.
+Like the two cross-expression functions, the `bullseye_scores` consider both cases above. Unlike these functions, the bullseye scores present both directions as outputs, making the output size in the latter twice as large as in the former two. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired.
 
 ### Bullseye plot
 
