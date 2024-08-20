@@ -21,7 +21,7 @@ In your terminal, run the following command:
 ```{r}
 touch demo_cross_expression.R
 ```
-This will create a new `R` file in which you can paste the upcoming commands and play around with various functions.
+This will create a new `R` file called `demo_cross_expression.R` in which you can paste the upcoming commands and play around with various functions.
 
 **!! Important !!**
 
