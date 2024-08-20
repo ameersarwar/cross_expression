@@ -209,7 +209,7 @@ This creates the following plot:
 
 <img width="653" alt="Screenshot 2024-07-08 at 11 16 40 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ac0c53cc-cbd7-4b0e-9725-e1ce228139af">
 
-The plot - called the `bullseye plot` - shows few cells co-expressing `Nrg1` with `Galntl6` (center) and many nearest neighbors (first ring) expressing `Nrg1`. Importantly, the number of distant neighbors (subsequent rings) expressing `Nrg1` is about the same as the number of cells co-expressing both genes.
+The plot - called the `bullseye plot` - shows fewer cells co-expressing `Nrg1` with `Galntl6` (center) and more nearest neighbors (first ring) expressing `Nrg1`. Importantly, the number of distant neighbors (subsequent rings) expressing `Nrg1` is about the same as the number of cells co-expressing both genes.
 
 ### Smooth gene expression
 We consider cross-expression as a relation between individual cells. However, groups of cells may form spatially contiguous niches and cross-expression may obtain between niches.
