@@ -90,8 +90,6 @@ Inspect the output:
 
 <img width="800" alt="Screenshot 2024-08-19 at 8 53 18 PM" src="https://github.com/user-attachments/assets/cc9b248e-122a-463e-b260-738f4b86ec8b">
 
-<img width="800" alt="Screenshot 2024-08-19 at 8 50 23 PM" src="https://github.com/user-attachments/assets/1f0011e2-b1d2-4814-b6df-6acb4eb5133d">
-
 The gene pairs in `cross` now only include those showing statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs in the `133` gene panel).
 
 **!! Important !!**
