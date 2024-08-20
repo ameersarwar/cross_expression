@@ -191,7 +191,7 @@ The bullseye scores can be used for subsequent analysis. For example, one can pr
 
 Cross-expression is conceptualized without considering direction. Specifically, the p-values in `cross_expression` or correlations in `cross_expression_correlation` consider the cases where gene A or gene B is in the target cell. The outputs are the FDR-corrected lower p-values and average correlation, respectively.
 
-Like the two cross-expression functions, the `bullseye_scores` consider both cases. Unlike these functions, however, the `bullseye_scores` present both directions as outputs, making its size twice as large those of the two cross-expression functions. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired.
+Like the two cross-expression functions, the `bullseye_scores` consider both cases. Unlike these functions, however, the `bullseye_scores` present both directions as outputs, making its size twice as large as those of the two cross-expression functions. Thus, the user can average the directional information or take the minimum, etc., if a unidirectional output is desired.
 
 ### Bullseye plot
 
