@@ -137,7 +137,7 @@ The p-value from `enrich$pvalue` is smaller than `alpha = 0.05`, suggesting that
 
 **!! Important !!**
 
-The `spatial_enrichment` algorithm is stochastic in the sense that we do not use all of the non-cross-expressing cells when computing distances. Instead, we use `max_pairs = 20000` as default. Using a larger number makes the p-value more accurate but reduces computational efficiency.
+The `spatial_enrichment` algorithm is stochastic in the sense that we do not use all of the non-cross-expressing cells when computing distances. Instead, we use `max_pairs = 20000` as default. Using a larger number makes the p-value more accurate but reduces efficiency.
 
 We can view the distances using:
 ```{r}
