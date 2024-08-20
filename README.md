@@ -247,4 +247,5 @@ Journal Name (20xx). DOI-info.
 ```
 ## Contact
 If you have any questions about the cross-expression framework, please email jesse.gillis@utoronto.ca.
+
 If you have any questions about using the functions outlined here or in the manuscript, please email ameer.sarwar@mail.utoronto.ca and copy jesse.gillis@utoronto.ca.
