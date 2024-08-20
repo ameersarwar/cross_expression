@@ -183,7 +183,7 @@ This generates the output:
 
 <img width="636" alt="Screenshot 2024-07-08 at 11 28 49 PM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/f9959852-b604-48c5-8c34-dbd0246199f5">
 
-We can see the scores for the target cell (`Cell`) and the neighbors `1:5` as specified in `window_sizes = 1:5`. The `window_sizes` input can be non-continuous and in any order, e.g., `window_sizes = c(100, 2:5, 12)`
+We can see the scores for the target cell (`Cell`) and the neighbors 1 to 5 as specified in `window_sizes = 1:5`. The `window_sizes` input can be non-continuous and in any order, e.g., `window_sizes = c(100, 2:5, 12)`
 
 The bullseye scores can be used for subsequent analysis. For example, one can present the scores as ratio of the neighbor to target scores (`ratio_to_co = TRUE` in the `bullseye_scores` function) and compare these across different genes or tissues, etc.
 
