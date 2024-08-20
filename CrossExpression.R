@@ -132,6 +132,7 @@ rotate_coordinates <- function(x, y, n_degrees = 0, center = FALSE, scale = FALS
 #' @return Returns a list containing gene pairs with co-expression and cross-expression p-values
 #'         before and after false discovery rate (FDR) correction.
 #'
+
 cross_expression <- function(data, locations, neighbor = 1, alpha_cross = 0.05, alpha_co = 0, output_matrix = FALSE){
   
   # convert data to sparse matrix and binarize
@@ -139,14 +140,13 @@ cross_expression <- function(data, locations, neighbor = 1, alpha_cross = 0.05, 
   data[data > 0] = 1
   
   # find nth nearest neighbors and create neighbors x genes matrix
-  neighbor  <- neighbor + 1
-  distances <- RANN::nn2(locations, locations, k = neighbor, searchtype = "standard", treetype = "kd")
-  distances <- distances$nn.idx[,neighbor]
-  data_temp <- data[distances,]
+  distances = RANN::nn2(locations, locations, k = neighbor + 1, searchtype = "standard", treetype = "kd")
+  distances = distances$nn.idx[, neighbor + 1]
+  data_temp = data[distances,]
   
   # number of shared genes between cell-neighbor pairs (cross-expression) and within the same cells (co-expression)
-  hyper_matrices <- get_cooccurrence_stats(data, data_temp, sparse = FALSE, binarize = FALSE)
-  cell_total     <- nrow(data)
+  hyper_matrices = get_cooccurrence_stats(data, data_temp, sparse = FALSE, binarize = FALSE)
+  cell_total     = nrow(data)
   
   # re-order matrices in ascending order by gene name
   names_seq = colnames(data)
@@ -180,12 +180,13 @@ cross_expression <- function(data, locations, neighbor = 1, alpha_cross = 0.05, 
   
   coexp = as.vector(hyper_matrices$cells)
   k = diag(hyper_matrices$cells)
-  m = k
   k = rep(k, each = nrow(hyper_matrices$cells))
   k = k - coexp
   
+  neig = t(data_temp) %*% data_temp
+  m = diag(neig)
   m = rep(m, times = nrow(hyper_matrices$cells))
-  m = m - coexp
+  m = m - as.vector(neig)
   n = cell_total - m
   
   q = t(q)
