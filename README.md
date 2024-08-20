@@ -88,6 +88,9 @@ head(cross)
 ```
 Inspect the output:
 
+<img width="1151" alt="Screenshot 2024-08-19 at 8 46 35 PM" src="https://github.com/user-attachments/assets/0093263e-020f-468c-a7ae-63fb53491fe4">
+
+
 <img width="717" alt="Screenshot 2024-07-05 at 1 04 13 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/eb205442-3840-47c7-9dbd-a7ae587ba9a6">
 
 The gene pairs in `cross` now only include those showing statistically significant cross-expression across our tissue slice. In total, you should have `52` pairs (out of `8778` possible pairs in the `133` gene panel).
