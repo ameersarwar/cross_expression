@@ -233,7 +233,7 @@ ggplot(locations2) + aes(x = pos_x, y = pos_y) + geom_point(size = 0) + theme_cl
 
 <img width="1061" alt="Screenshot 2024-07-09 at 12 40 55 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/ed25f762-c505-4865-b7b5-e79e1c79834f">
 
-The output in `locations2` rotates the xy coordinates `20` degrees counter-clockwise, z-score normalize them (`center = TRUE` and `scale = TRUE`), and reflect in the x and y axes (`flip_x = TRUE` and `flip_y = TRUE`).
+The output in `locations2` rotates the xy coordinates `20` degrees counter-clockwise, z-score normalizes them (`center = TRUE` and `scale = TRUE`), and reflects them in the x and y axes (`flip_x = TRUE` and `flip_y = TRUE`).
 
 In practice, we may begin with a tissue resembling `location2` and rotate it until it becomes close to the tissue in `locations`. Importantly, the linear transformations must be performed in light of the tissue biology and common practices concerning its presentation.
 
