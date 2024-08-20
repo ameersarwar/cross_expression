@@ -55,7 +55,7 @@ head(locations)
 ```
 You should see the following:
 
-<img width="354" alt="Screenshot 2024-07-04 at 2 32 29 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/e29da77f-e57e-4b34-9bf9-41e95b3e0adf">
+<img width="750" alt="Screenshot 2024-07-04 at 2 32 29 AM" src="https://github.com/ameersarwar/cross_expression/assets/174621170/e29da77f-e57e-4b34-9bf9-41e95b3e0adf">
 
 The `data` is a cells by genes expression matrix with 133 genes assayed across 94,100 cells, and `locations` contains the x (`pos_x`) and y (`pos_y`) coordinates (centroids) for each cell.
 
