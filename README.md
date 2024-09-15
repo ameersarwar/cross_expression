@@ -249,3 +249,6 @@ Journal Name (20xx). DOI-info.
 ```
 ## Contact
 If you have any questions, please email ameer.sarwar@mail.utoronto.ca and copy jesse.gillis@utoronto.ca.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
