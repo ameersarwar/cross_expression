@@ -239,6 +239,9 @@ The output in `locations2` rotates the xy coordinates `20` degrees counter-clock
 
 In practice, we may begin with a tissue resembling `location2` and rotate it until it becomes close to the tissue in `locations`. Importantly, the linear transformations must be performed in light of the tissue biology and common practices concerning its presentation.
 
+## Contact
+If you have any questions, please email ameer.sarwar@mail.utoronto.ca and copy jesse.gillis@utoronto.ca.
+
 ## Citation
 If you find the cross-expression framework or the accompanying functions useful, please cite the following manuscript:
 
@@ -247,8 +250,3 @@ Sarwar A, Rue M, French L, Cross H, Chen X, & Gillis J.
 Cross-expression analysis reveals patterns of coordinated gene expression in spatial transcriptomics
 Journal Name (20xx). DOI-info.
 ```
-## Contact
-If you have any questions, please email ameer.sarwar@mail.utoronto.ca and copy jesse.gillis@utoronto.ca.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
