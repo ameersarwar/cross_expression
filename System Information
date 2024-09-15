@@ -1,2 +1,2 @@
 # System Information
-Software developed on and tested using `R (version 4.4.1 (2024-06-14))` on an `Apple M1 Pro` laptop with `16 GB` RAM.
+Software developed on and tested using R (version 4.4.1, 2024-06-14) on an Apple M1 Pro laptop with 16 GB RAM. The relevant R libraries and their dependencies are installed, if needed, and loaded automatically when sourcing the CrossExpression.R file. This process and/or the execution of each function should take a few seconds. Benchmarks for time complexity on datasets of various sizes is presented in the associated manuscript.
