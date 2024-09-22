@@ -248,5 +248,5 @@ If you find the cross-expression framework or the accompanying software useful, 
 ```{sh}
 Sarwar A, Rue M, French L, Cross H, Chen X, & Gillis J.
 Cross-expression analysis reveals patterns of coordinated gene expression in spatial transcriptomics
-Journal Name (20xx). DOI-info.
+bioRxiv (2024). [DOI-info](https://doi.org/10.1101/2024.09.17.613579).
 ```
